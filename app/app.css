@@ -1,6 +1,6 @@
 /* Uncomment to enable TailwindCSS */
 
-/* @import "tailwindcss";
+@import "tailwindcss";
 
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
@@ -18,8 +18,18 @@ body {
   @media (prefers-color-scheme: light) {
     color-scheme: dark;
   }
-} */
+}
 
 body {
   font-family: "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+/* My Custom Styles */
+
+.t-header {
+  @apply border px-4 py-2 text-left
+}
+
+.t-data {
+  @apply border px-4 py-2
 }
