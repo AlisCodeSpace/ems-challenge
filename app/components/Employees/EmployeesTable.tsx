@@ -4,12 +4,7 @@ import SearchBar from "./SearchBar";
 import SortFilter from "./SortFilter";
 import Filter from "./Filter";
 
-interface Employee {
-  id: number;
-  full_name: string;
-  email: string;
-  job_title: string;
-}
+import type { Employee } from "~/types/Employee";
 
 interface EmployeesTableProps {
   employees: Employee[];

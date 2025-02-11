@@ -21,8 +21,8 @@ CREATE TABLE employees (
     full_name TEXT NOT NULL,
     -- Rest of the fields
     email TEXT NOT NULL UNIQUE,
-    phone_number TEXT NULL,
-    date_of_birth DATE NULL,
+    phone_number TEXT NOT NULL,
+    date_of_birth DATE NOT NULL,
     job_title TEXT NOT NULL,
     department TEXT NOT NULL,
     salary INTEGER NOT NULL CHECK (salary >= 0),

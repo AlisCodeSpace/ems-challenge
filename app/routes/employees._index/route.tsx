@@ -23,7 +23,7 @@ export default function EmployeesPage() {
       <div className="mt-6">
         <a
           href="/employees/new"
-          className="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+          className="inline-block bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
         >
           + New Employee
         </a>
