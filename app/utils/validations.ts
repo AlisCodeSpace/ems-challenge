@@ -44,6 +44,39 @@ export function meetsMinimumWage(salary: number): boolean {
  * @param phoneNumber - The phone number to validate.
  */
 export function isValidPhoneNumber(phoneNumber: string): boolean {
-    const phoneRegex = /^[+\d]?(?:[\d-.\s()]*)$/;
-    return phoneRegex.test(phoneNumber) && phoneNumber.replace(/\D/g, "").length >= 7 && phoneNumber.replace(/\D/g, "").length <= 15;
+  const phoneRegex = /^[+\d]?(?:[\d-.\s()]*)$/;
+  return phoneRegex.test(phoneNumber) && phoneNumber.replace(/\D/g, "").length >= 7 && phoneNumber.replace(/\D/g, "").length <= 15;
+}
+
+/**
+ * Validate that end date is not earlier than start date.
+ * @param startDate - The start date (YYYY-MM-DD).
+ * @param endDate - The end date (YYYY-MM-DD) or null.
+ */
+export function isValidDateRange(startDate: string, endDate: string | null): boolean {
+  if (!endDate) return true; // If `end_date` is null, it's valid (still working)
+  
+  const start = new Date(startDate);
+  const end = new Date(endDate);
+
+  return end >= start; // Ensure `end_date` is after or equal to `start_date`
+}
+
+export function isValidDateTimeFormat(dateTime: string): boolean {
+  // Regex for "YYYY-DD-MM HH:MM" format
+  const dateTimeRegex = /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$/;
+
+  if (!dateTimeRegex.test(dateTime)) {
+    return false; // Format does not match
   }
+
+  // Convert to a valid Date object for further validation
+  const [year, day, month, time] = dateTime.split(/[- ]/);
+  const isoDate = `${year}-${month}-${day}T${time}:00`; // Convert to valid ISO format
+
+  const date = new Date(isoDate);
+  return !isNaN(date.getTime()); // ✅ Ensure it's a valid date
+}
+
+
+

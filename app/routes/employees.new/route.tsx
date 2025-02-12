@@ -4,7 +4,7 @@ import { getDB } from "~/db/getDB";
 import fs from "fs";
 import path from "path";
 import InputField from "~/components/UI/InputField";
-import { isCVUploaded, isValidAge, isValidEmail, isValidPhoneNumber, meetsMinimumWage, MIN_WAGE } from "~/utils/validations";
+import { isCVUploaded, isValidAge, isValidDateRange, isValidEmail, isValidPhoneNumber, meetsMinimumWage, MIN_WAGE } from "~/utils/validations";
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
@@ -43,6 +43,10 @@ export const action: ActionFunction = async ({ request }) => {
 
   if (!meetsMinimumWage(salary)) {
     return { error: `Salary must be at least $${MIN_WAGE}.` };
+  }
+
+  if (!isValidDateRange(start_date, end_date)) {
+    return { error: "End date cannot be earlier than start date." };
   }
 
   const cvUploadDir = path.join(process.cwd(), "app/files/cvs");

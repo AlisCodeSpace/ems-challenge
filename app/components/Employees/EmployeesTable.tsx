@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
-import SearchBar from "./SearchBar";
 import SortFilter from "./SortFilter";
 import Filter from "./Filter";
 
 import type { Employee } from "~/types/Employee";
+import SearchBar from "../Searchbar";
 
 interface EmployeesTableProps {
   employees: Employee[];
@@ -49,7 +49,8 @@ export default function EmployeesTable({ employees }: EmployeesTableProps) {
         {/* To search via employee name */}
         <SearchBar 
           searchQuery={searchQuery} 
-          setSearchQuery={setSearchQuery} 
+          setSearchQuery={setSearchQuery}
+          placeholder="Search by name..." 
         />
 
         {/* For sorting Acending or Descending */}

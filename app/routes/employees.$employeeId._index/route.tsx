@@ -1,7 +1,8 @@
 import { useLoaderData } from "react-router";
 import { useState } from "react";
-import EmployeeTable from "~/components/Employee/EmployeeTable";
 import { getDB } from "~/db/getDB";
+import Table from "~/components/Table";
+import type { SingleEmployee } from "~/types/Employee";
 
 export async function loader({ params }: { params: { employeeId: string } }) {
   const db = await getDB();
@@ -15,10 +16,10 @@ export async function loader({ params }: { params: { employeeId: string } }) {
 }
 
 export default function EmployeePage() {
-  const { employee: initialEmployee } = useLoaderData() as { employee: any };
+  const { employee: initialEmployee } = useLoaderData() as { employee: SingleEmployee };
   const [employee, setEmployee] = useState(initialEmployee);
 
-  const handleSave = async (updatedEmployee: any) => {
+  const handleSave = async (updatedEmployee: SingleEmployee) => {
     const response = await fetch(`/employees/${employee.id}/edit`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -29,8 +30,7 @@ export default function EmployeePage() {
       const errorData = await response.json();
       alert(errorData.error || "An error occurred while updating.");
       return;
-    }
-
+    } 
     setEmployee(updatedEmployee); 
   };
 
@@ -38,7 +38,7 @@ export default function EmployeePage() {
     <div className="container mx-auto p-6">
       <h1 className="text-2xl font-bold mb-4">Employee Details</h1>
 
-      <EmployeeTable employee={employee} onSave={handleSave} />
+      <Table data={employee} onSave={handleSave} />
 
       <hr className="my-6" />
 

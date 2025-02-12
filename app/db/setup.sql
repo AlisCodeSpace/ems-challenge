@@ -27,7 +27,7 @@ CREATE TABLE employees (
     department TEXT NOT NULL,
     salary INTEGER NOT NULL CHECK (salary >= 0),
     start_date DATE NOT NULL,
-    end_date DATE NULL
+    end_date DATE NULL CHECK (end_date > start_date)
 );
 
 -- Create timesheets table

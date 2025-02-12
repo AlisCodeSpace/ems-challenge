@@ -1,6 +1,6 @@
 import { redirect, type ActionFunction } from "react-router";
 import { getDB } from "~/db/getDB";
-import { isValidEmail, isValidPhoneNumber, meetsMinimumWage } from "~/utils/validations";
+import { isValidDateRange, isValidEmail, isValidPhoneNumber, meetsMinimumWage } from "~/utils/validations";
 
 export const action: ActionFunction = async ({ request, params }) => {
   const employeeId = params.employeeId;
@@ -36,12 +36,28 @@ export const action: ActionFunction = async ({ request, params }) => {
     });
   }
 
-  const db = await getDB();
-  await db.run(
-    `UPDATE employees SET full_name = ?, email = ?, phone_number = ?, job_title = ?, department = ?, salary = ?, start_date = ?, end_date = ?, date_of_birth = ?
-    WHERE id = ?`,
-    [full_name, email, phone_number, job_title, department, salary, start_date, end_date, date_of_birth, employeeId]
-  );
+  if (!isValidDateRange(start_date, end_date)) {
+    return new Response(JSON.stringify({ error: "End date cannot be earlier than start date" }), {
+      status: 400,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
 
-  return redirect(`/employees/${employeeId}`);
+  const db = await getDB();
+
+  try {
+    await db.run(
+      `UPDATE employees SET full_name = ?, email = ?, phone_number = ?, job_title = ?, department = ?, salary = ?, start_date = ?, end_date = ?, date_of_birth = ?
+      WHERE id = ?`,
+      [full_name, email, phone_number, job_title, department, salary, start_date, end_date, date_of_birth, employeeId]
+    );
+
+    return redirect(`/employees/${employeeId}`);
+  } catch(error) {
+    console.error("Database Update Error:", error);
+    return new Response(JSON.stringify({ error: "Database update failed" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
 };

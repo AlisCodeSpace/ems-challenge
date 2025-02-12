@@ -53,20 +53,20 @@ const employees = [
 const timesheets = [
   {
     employee_id: 1,
-    start_time: '2025-02-10 08:00:00',
-    end_time: '2025-02-10 17:00:00',
+    start_time: '2025-02-10 08:00',
+    end_time: '2025-02-10 17:00',
     work_summary: 'Developed a new feature for the dashboard'
   },
   {
     employee_id: 2,
-    start_time: '2025-02-11 12:00:00',
-    end_time: '2025-02-11 17:00:00',
+    start_time: '2025-02-11 12:00',
+    end_time: '2025-02-11 17:00',
     work_summary: 'Managed a project meeting with stakeholders'
   },
   {
     employee_id: 3,
-    start_time: '2025-02-12 07:00:00',
-    end_time: '2025-02-12 16:00:00',
+    start_time: '2025-02-12 07:00',
+    end_time: '2025-02-12 16:00',
     work_summary: 'Designed a new user interface layout'
   },
 ];
