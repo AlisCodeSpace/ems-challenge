@@ -6,7 +6,7 @@ type TableData = SingleEmployee | Timesheet;
 
 interface TableProps<T extends TableData> {
   data: T;
-  onSave: (updatedData: T) => void;
+  onSave: (updatedData: T) => Promise<{ success: boolean }>; // Expect API response
   employees?: Employee[]; // List of employees for dropdown in timesheet editing
 }
 
@@ -29,6 +29,15 @@ export default function Table<T extends TableData>({ data, onSave, employees }: 
   const isDateField = (key: keyof T) => {
     const value = updatedData[key];
     return typeof value === "string" && key.toString().toLowerCase().includes("date");
+  };
+
+  {/* To prevent from updating the UI of a field to a wrong value, we keep the user in edit mode unless they cancel or input a correct value */}
+  const handleSave = async () => {
+    const response = await onSave(updatedData); // Call API and wait for response
+
+    if (response.success) {
+      setEditMode(false); // Exit edit mode only if API call succeeds
+    }
   };
 
   return (
@@ -122,10 +131,7 @@ export default function Table<T extends TableData>({ data, onSave, employees }: 
         <div className="flex w-full gap-4 mt-4">
           <button
             className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 cursor-pointer"
-            onClick={() => {
-              onSave(updatedData);
-              setEditMode(false);
-            }}
+            onClick={handleSave}
             disabled={!isModified} // Disable Save if no changes
           >
             Update

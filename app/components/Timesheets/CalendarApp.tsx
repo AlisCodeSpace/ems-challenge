@@ -15,6 +15,7 @@ interface CalendarAppProps {
   events: CalendarEvent[]
 }
 
+{/* CalendarApp Component used from the provided example */}
 function CalendarApp({ events }: CalendarAppProps) {
   const eventsService = useState(() => createEventsServicePlugin())[0];
 

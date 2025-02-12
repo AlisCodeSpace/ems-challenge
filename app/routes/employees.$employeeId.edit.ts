@@ -2,6 +2,7 @@ import { redirect, type ActionFunction } from "react-router";
 import { getDB } from "~/db/getDB";
 import { isValidDateRange, isValidEmail, isValidPhoneNumber, meetsMinimumWage } from "~/utils/validations";
 
+// API for handling employee infor update
 export const action: ActionFunction = async ({ request, params }) => {
   const employeeId = params.employeeId;
   const formData = await request.json();

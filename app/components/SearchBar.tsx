@@ -4,6 +4,7 @@ interface SearchBarProps {
   placeholder: string;
 }
 
+{/* A reusable search bar */}
 export default function SearchBar({ searchQuery, setSearchQuery, placeholder }: SearchBarProps) {
   return (
     <div className="mb-4">

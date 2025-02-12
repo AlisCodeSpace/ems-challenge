@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import SortFilter from "./SortFilter";
 import Filter from "./Filter";
+import SearchBar from "../SearchBar";
 
 import type { Employee } from "~/types/Employee";
-import SearchBar from "../Searchbar";
+
 
 interface EmployeesTableProps {
   employees: Employee[];
@@ -18,9 +19,8 @@ export default function EmployeesTable({ employees }: EmployeesTableProps) {
   const [filterField, setFilterField] = useState("job_title"); 
   const [filterValue, setFilterValue] = useState(""); 
 
-  // Pagination states
-  const [currentPage, setCurrentPage] = useState(1);
-  const employeesPerPage = 5; 
+  const [currentPage, setCurrentPage] = useState(1); // Pagination state initial set to page 1
+  const employeesPerPage = 5; // Adjust this to change the number of employees per page
 
   // Get unique job titles for filtering
   const jobTitles = Array.from(new Set(employees.map((e) => e.job_title)));
@@ -61,7 +61,7 @@ export default function EmployeesTable({ employees }: EmployeesTableProps) {
           setSortOrder={setSortOrder} 
         />
 
-        {/* For filtering based on columns */}
+        {/* For filtering based on different fields */}
         <Filter
           filterField={filterField}
           setFilterField={setFilterField}

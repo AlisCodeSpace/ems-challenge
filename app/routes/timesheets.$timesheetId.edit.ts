@@ -2,6 +2,7 @@ import { redirect, type ActionFunction } from "react-router";
 import { getDB } from "~/db/getDB";
 import { isValidDateRange, isValidDateTimeFormat } from "~/utils/validations";
 
+// API for handling timesheet update
 export const action: ActionFunction = async ({ request, params }) => {
   const timesheetId = params.timesheetId; 
   const formData = await request.json();

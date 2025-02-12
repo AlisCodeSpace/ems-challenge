@@ -8,6 +8,7 @@ interface InputFieldProps {
   accept?: string; // File types allowed (e.g., "image/*" or ".pdf")
 }
 
+{/* A reusable input field component */}
 export default function InputField({ label, name, type = "text", required, accept }: InputFieldProps) {
   const [preview, setPreview] = useState<string | null>(null);
 
@@ -17,7 +18,7 @@ export default function InputField({ label, name, type = "text", required, accep
     if (file) {
       if (type === "file" && accept?.includes("image")) {
         const imageUrl = URL.createObjectURL(file);
-        setPreview(imageUrl);
+        setPreview(imageUrl); // Show image preview
       } else {
         setPreview(file.name); // Show file name for non-image uploads
       }

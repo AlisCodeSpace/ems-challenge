@@ -21,6 +21,7 @@ export const action: ActionFunction = async ({ request }) => {
   const cvFile = formData.get("cv") as File;
   const idFile = formData.get("id_card") as File;
 
+  // Validations
   if (!full_name || !email || !job_title || !department || salary === null || !start_date || !date_of_birth) {
     return { error: "All fields are required!" };
   }
@@ -84,8 +85,10 @@ export default function NewEmployeePage() {
   return (
     <div className="container mx-auto p-6 max-w-lg">
       <h1 className="text-2xl text-center font-bold mb-4">Create New Employee</h1>
-
+      
+      {/* Employee Form */}
       <Form method="post" encType="multipart/form-data" className="bg-gray-100 p-6 rounded shadow-md">
+        {/* Employee Details */}
         <InputField label="Full Name" name="full_name" required />
         <InputField label="Email" name="email" type="email" required />
         <InputField label="Phone Number" name="phone_number" type="tel" />
@@ -110,7 +113,8 @@ export default function NewEmployeePage() {
           </div>
         )}
       </Form>
-
+      
+      {/* Navigation Buttons */}
       <ul className="flex gap-4 mt-6">
         <li>
           <a href="/employees" className="inline-block bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">

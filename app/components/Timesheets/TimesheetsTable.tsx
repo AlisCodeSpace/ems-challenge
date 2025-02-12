@@ -5,10 +5,12 @@ interface TimesheetsTableProps {
     timesheets: Timesheet[];
 }
 
+{/* Timesheet table displaying the timesheet data */}
 export default function TimesheetsTable({ timesheets }: TimesheetsTableProps) {
     return (
       <div className="overflow-x-auto">
         <table className="min-w-full border border-gray-300 shadow-lg">
+          {/* Timesheet headers (field names) */}
           <thead className="bg-gray-100">
             <tr>
               <th className="t-header">Timesheet ID</th>
@@ -19,6 +21,7 @@ export default function TimesheetsTable({ timesheets }: TimesheetsTableProps) {
               <th className="t-header">Actions</th>
             </tr>
           </thead>
+          {/* Timesheet values */}
           <tbody>
             {timesheets.length > 0 ? (
               timesheets.map((timesheet) => (

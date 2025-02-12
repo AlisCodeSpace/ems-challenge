@@ -2,15 +2,16 @@ import { useLoaderData } from "react-router";
 import { getDB } from "~/db/getDB";
 import { useState } from "react";
 import EmployeesTable from "~/components/Employees/EmployeesTable";
+import type { Employee } from "~/types/Employee";
 
 export async function loader() {
   const db = await getDB();
-  const employees = await db.all("SELECT * FROM employees;");
+  const employees: Employee[] = await db.all("SELECT * FROM employees;");
   return { employees };
 }
 
 export default function EmployeesPage() {
-  const { employees } = useLoaderData();
+  const { employees } = useLoaderData() as { employees: Employee[] };
 
   return (
     <div className="container mx-auto p-6">

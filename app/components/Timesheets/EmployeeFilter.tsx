@@ -7,6 +7,7 @@ interface EmployeeFilterProps {
   setSelectedEmployee: (employeeId: string) => void;
 }
 
+{/* Component to filter timesheets by employee name */}
 export default function EmployeeFilter({ employees, selectedEmployee, setSelectedEmployee }: EmployeeFilterProps) {
   return (
     <div className="mb-4 flex">

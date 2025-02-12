@@ -14,7 +14,8 @@ import { formatDate } from "~/utils/helpers";
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
-  const employee_id = formData.get("employee_id") ;
+  
+  const employee_id = formData.get("employee_id") as number | null;
   const start_time = formData.get("start_time") as string | null;
   const end_time = formData.get("end_time") as string | null;
   const work_summary = formData.get("work_summary")
@@ -46,7 +47,8 @@ export default function NewTimesheetPage() {
   return (
     <div className="container mx-auto p-6 max-w-lg">
       <h1 className="text-2xl text-center font-bold mb-4">Create New Timesheet</h1>
-
+      
+      {/* Timesheet Form */}
       <Form method="post" className="bg-gray-100 p-6 rounded shadow-md">
         {/* Employee Selection */}
         <div className="mb-4">
@@ -85,7 +87,8 @@ export default function NewTimesheetPage() {
           </div>
         )}
       </Form>
-
+      
+      {/* Navigation Buttons */}
       <ul className="flex gap-4 mt-6">
         <li>
           <a href="/timesheets" className="inline-block bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">

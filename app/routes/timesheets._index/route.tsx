@@ -1,16 +1,18 @@
 import { useLoaderData } from "react-router";
 import { useState } from "react";
 import { getDB } from "~/db/getDB";
+
 import CalendarApp from "~/components/Timesheets/CalendarApp";
 import TimesheetsTable from "~/components/Timesheets/TimesheetsTable";
-
 import EmployeeFilter from "~/components/Timesheets/EmployeeFilter";
+import SearchBar from "~/components/SearchBar";
 
 import type { Timesheet } from "~/types/Timesheet";
 import type { Employee } from "~/types/Employee";
 import type { CalendarEvent } from "~/types/Calendar";
+
 import { formatToScheduleX } from "~/utils/helpers";
-import SearchBar from "~/components/Searchbar";
+
 
 export async function loader() {
   const db = await getDB();
@@ -53,11 +55,7 @@ export default function TimesheetsPage() {
 
   return (
     <div className="container mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-4">Timesheets</h1>
-
-      {/* Search and Filter Components */}
-      
-
+      <h1 className="text-2xl font-bold mb-4">Timesheets</h1>  
       {/* Toggle View Buttons */}
       <div className="mb-4 flex justify-between items-center">
         <div className="flex gap-4">
@@ -75,9 +73,9 @@ export default function TimesheetsPage() {
           </button>
         </div>
 
+        {/* Search by work summary or filter by employees */}
         <div className="flex gap-8 items-center">
           <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} placeholder="Search by work summary..."/>
-
           <EmployeeFilter 
             employees={employees} 
             selectedEmployee={selectedEmployee} 
@@ -86,7 +84,7 @@ export default function TimesheetsPage() {
         </div>
       </div>
 
-      {/* Conditional Rendering Based on View */}
+      {/* Conditional Rendering based on View */}
       {view === "table" ? (
         <TimesheetsTable timesheets={filteredTimesheets} />
       ) : (
