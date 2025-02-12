@@ -1,0 +1,9 @@
+[build]
+  command = "npm run build" # Adjust if your build script is different
+  publish = "dist" # Directory where your React app is built
+  functions = "netlify/functions" # Folder for serverless functions
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
